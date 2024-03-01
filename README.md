@@ -1,13 +1,29 @@
-### React Query Starter - Typescript (Hỏi Dân IT)
+### React Query - Typescript
 
-Template này được sử dụng cho series "A State Manager for React" của tác giả Hỏi Dân IT (Eric)
+How to run project
 
-Các bước cần làm:
+1. Clone project
 
-1. Clone dự án
-2. Cài đặt các thư viện cần thiết: npm i
-3. Chạy dự án với câu lệnh: npm run dev
+```
+git clone [url]
+```
 
- 
-Truy cập:  http://localhost:5173/
-"# react-query" 
+2. Install node_modules
+
+```
+npm i
+```
+
+3. Run project
+
+```
+npm run dev
+```
+
+Access to:
+
+```
+http://localhost:5173/
+```
+
+"# react-query"
