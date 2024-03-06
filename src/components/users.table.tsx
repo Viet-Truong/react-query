@@ -8,6 +8,7 @@ import UsersPagination from './pagination/users.pagination';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { calculatePagesCount } from '../helper';
 
 interface IUser {
   id: number;
@@ -15,15 +16,14 @@ interface IUser {
   email: string;
 }
 
-const PAGE_SIZE = 1;
+const PAGE_SIZE = 5;
 
 function UsersTable() {
   const [isOpenCreateModal, setIsOpenCreateModal] = useState<boolean>(false);
-
   const [isOpenUpdateModal, setIsOpenUpdateModal] = useState<boolean>(false);
-  const [dataUser, setDataUser] = useState({});
-
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
+
+  const [dataUser, setDataUser] = useState({});
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -40,8 +40,7 @@ function UsersTable() {
       fetch(`http://localhost:8000/users?_page=${currentPage}&_limit=${PAGE_SIZE}`).then((res) => {
         const total_items = +(res.headers?.get('X-Total-Count') ?? 0);
         const page_size = PAGE_SIZE;
-        const total_pages = total_items == 0 ? 0 : (total_items - 1) / page_size + 1;
-        setTotalPage(total_pages);
+        setTotalPage(calculatePagesCount(page_size, total_items));
         return res.json();
       }),
     placeholderData: keepPreviousData,
